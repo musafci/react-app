@@ -1,28 +1,43 @@
 import React, {Component} from "react";
-import './style.css';
 import Style from './style.module.css';
 class App extends Component {
 
-    render() {
-        const style = {
-            color: 'green',
-            fontSize: '22px',
-            fontWeight: '600'
+    state = {
+        name: '',
+    }
+
+    buttonClickEvent = (event) => {
+        console.log(event);
+        console.log(event.target);
+        console.log("react event");
+    };
+
+    onChangeEvent = (event) => {
+        console.log(event.target.value);
+        this.setState({name: event.target.value})
+    };
+
+    onFocusEvent = (event) => {
+        console.log("I am focus.");
+    };
+
+    onBlueEvent = (event) => {
+        if(!this.state.name) {
+            alert("Please enter your name.");
         }
+        console.log("I am blur");
+    }
 
+    render() {
         return(
-            <div className="CustomClass">
-                <h1 style={{color:'red', fontSize: '20px'}}>
-                    Inline Style 1
-                </h1>
-
-                <h1 style={style}>
-                    Inline Style 2
-                </h1>
-
-                <button className="button">Normal Style Import Button</button>
-                <button className={Style.button}>Module Based Style Impot Button</button>
-
+            <div className={Style.App}>
+                <h1>Event in React</h1>
+                <button className={Style.button} onClick={this.buttonClickEvent}>Click Me</button>
+                <br/>
+                <input onChange={this.onChangeEvent} onFocus={this.onFocusEvent} onBlur={this.onBlueEvent} value={this.state.name} type="text" placeholder="Enter your name"/>
+                <br />
+                <br />
+                {this.state.name && <h3>Welcome, {this.state.name}</h3>}
             </div>
         )
     }
