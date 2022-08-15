@@ -1,65 +1,28 @@
 import React, {Component} from "react";
+import './style.css';
+import Style from './style.module.css';
 class App extends Component {
-    
-    state = {
-        count: 0
-    }
-
-    intervalId = null;
-
-    incrementCount = () => {
-        this.setState({count: this.state.count +1});
-    };
-
-    decrementCount = () => {
-        if(this.state.count > 0) {
-            this.setState({count: this.state.count -1});
-        }
-    };
-
-    startTimer = () => {
-        if(this.state.count > 0 && !this.intervalId) {
-            this.intervalId =  setInterval(() => {
-                this.setState({count: this.state.count -1}, () => {
-                    if(this.state.count === 0) {
-                        alert("Counter Finished.")
-                        clearInterval(this.intervalId)
-                        this.intervalId = null
-                    }
-                })
-            }, 1000)
-        }
-    };
-
-    stopTimer = () => {
-        if(this.intervalId) {
-            clearInterval(this.intervalId)
-            this.intervalId = null
-        }
-    };
-
-    resetTimer = () => {
-        this.setState({count: 0})
-        clearInterval(this.intervalId)
-        this.intervalId = null
-    };
 
     render() {
+        const style = {
+            color: 'green',
+            fontSize: '22px',
+            fontWeight: '600'
+        }
 
         return(
             <div className="CustomClass">
-                <div>
-                    <h1>Simple Timer</h1>
-                    <button onClick={this.incrementCount}>+</button>
-                    <span>{this.state.count}</span>
-                    <button onClick={this.decrementCount}>-</button>
-                </div>
+                <h1 style={{color:'red', fontSize: '20px'}}>
+                    Inline Style 1
+                </h1>
 
-                <div>
-                    <button onClick={this.startTimer}>Start</button>
-                    <button onClick={this.stopTimer}>Stop</button>
-                    <button onClick={this.resetTimer}>Reset</button>
-                </div>                
+                <h1 style={style}>
+                    Inline Style 2
+                </h1>
+
+                <button className="button">Normal Style Import Button</button>
+                <button className={Style.button}>Module Based Style Impot Button</button>
+
             </div>
         )
     }
