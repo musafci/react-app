@@ -5,17 +5,25 @@ class Inputs extends React.Component {
         name: '',
         country: '',
         bio: '',
-        birthDay: '',        
+        birthDay: '',
+        gender: '',
+        agree: false,
     };
     
     handleChange = (event) => {
        this.setState({
         [event.target.name]: event.target.value
        }); 
-    }
+    };
+
+    handleCheckbox = (event) => {
+        this.setState({
+            agree: event.target.checked
+        })
+    };
     
     render() {
-        const {name, country, bio, birthDay} = this.state;
+        const {name, country, bio, birthDay, agree} = this.state;
 
         return(
             <div>
@@ -34,6 +42,15 @@ class Inputs extends React.Component {
                 <textarea onChange={this.handleChange} value={bio} className="form-control my-2" name="bio" id="" cols="20" rows="5"></textarea>
 
                 <input onChange={this.handleChange} value={birthDay} className="form-control my-2" type="date" name="birthDay" id="" />
+
+                <div>
+                    <input onChange={this.handleChange} className="form-check-input" type="radio" name="gender" value="male" /> Male
+                    <input onChange={this.handleChange} className="form-check-input" type="radio" name="gender" value="female" /> Female
+                </div>
+
+                <div>
+                    <input onChange={this.handleCheckbox} checked={agree} type="checkbox" name="agree" id="" /> I agree all terms & condition.
+                </div>
 
                 <button onClick={() => {console.log(this.state)}} className="btn btn-success">Show Data</button>
             </div>
