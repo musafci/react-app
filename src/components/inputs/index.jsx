@@ -8,6 +8,7 @@ class Inputs extends React.Component {
         birthDay: '',
         gender: '',
         agree: false,
+        skills: [],
     };
     
     handleChange = (event) => {
@@ -21,9 +22,22 @@ class Inputs extends React.Component {
             agree: event.target.checked
         })
     };
+
+    handleSkillChange = (event) => {
+        if(event.target.checked) {
+            this.setState({
+                skills: [...this.state.skills, event.target.value]
+            })
+        } else {
+            const skills = this.state.skills.filter(skill => skill != event.target.value)
+            this.setState({
+                skills
+            })
+        }
+    };
     
     render() {
-        const {name, country, bio, birthDay, agree} = this.state;
+        const {name, country, bio, birthDay, agree, skills} = this.state;
 
         return(
             <div>
@@ -46,6 +60,14 @@ class Inputs extends React.Component {
                 <div>
                     <input onChange={this.handleChange} className="form-check-input" type="radio" name="gender" value="male" /> Male
                     <input onChange={this.handleChange} className="form-check-input" type="radio" name="gender" value="female" /> Female
+                </div>
+
+                <div>
+                    Skills: <br/>
+                    <input type="checkbox" name="skills" value="PHP" checked={skills.includes("PHP")} onChange={this.handleSkillChange} /> PHP
+                    <input type="checkbox" name="skills" value="Laravel" checked={skills.includes("Laravel")} onChange={this.handleSkillChange} /> Laravel
+                    <input type="checkbox" name="skills" value="React" checked={skills.includes("React")} onChange={this.handleSkillChange} /> React
+                    <input type="checkbox" name="skills" value="Vue" checked={skills.includes("Vue")} onChange={this.handleSkillChange} /> Vue
                 </div>
 
                 <div>
