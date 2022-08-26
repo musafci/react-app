@@ -34,11 +34,45 @@ class SignUpForm extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        console.log(this.state.values);
+        const { isValid, errors } = this.validate();
 
-        event.target.reset();
+        if(isValid) {
+            console.log(this.state.values);
+            event.target.reset();
+            this.setState({values: initValues, agreement: false})
+        } else {
+            console.log(errors);
+        }
+    };
 
-        this.setState({values: initValues, agreement: false})
+    validate = () => {
+        const errors = {}
+        const { values: {name, email, password, gender, birthDay} } = this.state
+
+        if(!name) {
+            errors.name = "Please provide your name"
+        }
+
+        if(!email) {
+            errors.email = "Please provide your email"
+        }
+
+        if(!password) {
+            errors.password = "Please provide your password"
+        }
+
+        if(!gender) {
+            errors.gender = "Please select your gender"
+        }
+
+        if(!birthDay) {
+            errors.birthDay = "Please select your birthDay"
+        }
+
+        return {
+            errors,
+            inValid: Object.keys(errors).length === 0
+        }
     };
 
     render() {
