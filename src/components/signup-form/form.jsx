@@ -2,13 +2,14 @@ import React from "react";
 import PropTypes from 'prop-types';
 import TextInput from "./text-input";
 
-const Form = ({values, agreement, handleChange, handleAgreement, handleSubmit}) => {
+const Form = ({values, agreement, errors, handleChange, handleAgreement, handleSubmit}) => {
     return(
         <form onSubmit={handleSubmit}>
             <TextInput
                 name="name"
                 label="Name"
                 value={values.name}
+                error={errors.name}
                 type="text"
                 onChange={handleChange}
                 placeholder="Enter Name"
@@ -17,6 +18,7 @@ const Form = ({values, agreement, handleChange, handleAgreement, handleSubmit}) 
                 name="email"
                 label="Email"
                 value={values.email}
+                error={errors.email}
                 type="email"
                 onChange={handleChange}
                 placeholder="Enter Email"
@@ -25,6 +27,7 @@ const Form = ({values, agreement, handleChange, handleAgreement, handleSubmit}) 
                 name="password"
                 label="Password"
                 value={values.password}
+                error={errors.password}
                 type="password"
                 onChange={handleChange}
                 placeholder="Enter password"
@@ -33,6 +36,7 @@ const Form = ({values, agreement, handleChange, handleAgreement, handleSubmit}) 
                 name="birthDay"
                 label="Birthday"
                 value={values.birthDay}
+                error={errors.birthDay}
                 type="date"
                 onChange={handleChange}
             />
@@ -49,6 +53,7 @@ const Form = ({values, agreement, handleChange, handleAgreement, handleSubmit}) 
                     <input className="mx-2" type="radio" name="gender" value="Other" onChange={handleChange} />
                     Other
                 </label>
+                {errors.gender && <div className="invalid-feedback">{errors.gender}</div>}
             </div>
             <div className="form-group">
                 <label>
@@ -65,6 +70,7 @@ const Form = ({values, agreement, handleChange, handleAgreement, handleSubmit}) 
 Form.propTypes = {
     values: PropTypes.object.isRequired,
     agreement: PropTypes.bool.isRequired,
+    errors: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleAgreement: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired
