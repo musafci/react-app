@@ -30,7 +30,7 @@ const Form = ({values, agreement, handleChange, handleAgreement, handleSubmit}) 
                 placeholder="Enter password"
             />
             <TextInput
-                name="birthday"
+                name="birthDay"
                 label="Birthday"
                 value={values.birthDay}
                 type="date"
